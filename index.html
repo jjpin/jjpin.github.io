@@ -2,48 +2,115 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>我的自我介紹</title>
-<body bgcolor=e6e6fa>
+	<title>計算機</title>
+</head>
 
-<h1 align = "center">我的自我介紹</h1>
-<h2 align = "center">我叫<a href="https://www.facebook.com/jinpin.jia">賈晉平</a>，今年19歲。</h2>
 
-<h3 align = "center">
-<img src="https://scontent.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/10304869_748528695222456_589180645767720628_n.jpg?oh=85c8a3bf98eedc74521012c98f2eca7b&oe=55B9493C"></h3>
+<body background = "http://images6.fanpop.com/image/photos/34500000/Purple-Wallpaper-colors-34511580-1920-1200.jpg">
 
-<h4 align = "center">
-	<font color=9400d3>一段話是要打多長啊~~一段話是要打多長啊~~一段話是要打多長啊~~一段話是要打多長啊~~一段話是要打多長啊~~一段話是要打多長啊~~一段話是要打多長啊~~</font>
-</h4>
+<script type="text/javascript">
 
-<br/>
+    var temp=0;  //暫存被運算數
+    var strOperation=0;  //暫存運算符號
+    var valueM=0;  //mc暫
+    var valueA;
 
-<h5>我喜歡：
-<ul>
-　<li>看電影</li>
-　<li>聽音樂</li>
-　<li>發呆</li>
-</ul></h5>
+    //數字
+    function numberBtn(str) {
+        if (strOperation==null) {
+            document.getElementById("box").value = str;
+            strOperation=0;
+            return;
+        };
 
-<br/>
+       if (document.getElementById("box").value==0) { 
+            document.getElementById("box").value = str;
+        } else {
+        document.getElementById("box").value += str;
+        }
 
-<h6 align = "center">我的學歷</h6>
+    }
 
-<table border="1" width=250 align = "center">
-<tr>
-<td>國小</td>
-<td><a href="http://www.hyes.tyc.edu.tw/">信義國小</a></td>
-</tr>
-<tr>
-<td>國中</td>
-<td><a href="http://www.fths.tyc.edu.tw/">復旦中學</a></td>
-</tr>
-<tr>
-<td>高中</td>
-<td><a href="http://www.wlsh.tyc.edu.tw/bin/home.php">武陵高中</a></td>
-</tr>
-<tr>
-<td>大學</td>
-<td><a href="http://www.nccu.edu.tw/">政治大學</a></td>
-</tr>
 
-</table>
+    //運算
+    function operationBtn(str){
+
+        valueA=document.getElementById("box").value;
+        strOperation=str;
+
+        equal();
+
+        document.getElementById("box").value=0;
+    }
+
+    //等於
+    function equal(){   
+
+        if(strOperation='+'){
+            document.getElementById("box").value = parseFloat(valueA) + parseFloat(document.getElementById("box").value);
+        }else if(strOperation='-'){
+            document.getElementById("box").value = parseFloat(valueA) - parseFloat(document.getElementById("box").value);
+        }else if(strOperation='*'){
+            document.getElementById("box").value = parseFloat(valueA) * parseFloat(document.getElementById("box").value);
+        }else if(strOperation='/'){
+            document.getElementById("box").value = parseFloat(valueA) / parseFloat(document.getElementById("box").value);
+        }
+        //防呆用
+        temp=null;
+        strOperation=null;
+    }
+
+    //清空
+    function clearBtn(str){
+        if(strOperation='MC'){
+            temp=0;
+                strOperation=0;
+                valueM=0;
+                document.getElementById("box").value = '0';
+        }
+    }
+</script>
+
+
+
+    <div>
+	<table border=1 align="center" bgcolor="#C0C0C0">
+    <tr>
+        <td align="center" colspan="10"> 
+            <input align="right" type="text" value="0" id="box">
+        </td>
+    </tr>
+    <tr align="center">
+        <td><input type="button" value="1" onClick="numberBtn('1')" align="center"></td>
+        <td><input type="button" value="2" onClick="numberBtn('2')" align="center"></td>
+        <td><input type="button" value="3" onClick="numberBtn('3')" align="center"></td>
+        <td><input type="button" value="+" onClick="operationBtn('+')" align="center"></td>
+    </tr>
+    <tr align="center">
+        <td><input type="button" value="4" onClick="numberBtn('4')" align="center"></td>
+        <td><input type="button" value="5" onClick="numberBtn('5')" align="center"></td>
+        <td><input type="button" value="6" onClick="numberBtn('6')" align="center"></td>
+        <td><input type="button" value="-" onClick="operationBtn('-')" align="center"></td>
+    </tr>
+    <tr align="center">
+        <td><input type="button" value="7" onClick="numberBtn('7')" align="center"></td>
+        <td><input type="button" value="8" onClick="numberBtn('8')" align="center"></td>
+        <td><input type="button" value="9" onClick="numberBtn('9')" align="center"></td>
+        <td><input type="button" value="*" onClick="operationBtn('*')" align="center"></td>
+    </tr>
+    <tr align="center">
+        <td><input type="button" value="0" onClick="numberBtn('0')" align="center"></td>
+        <td><input type="button" value="." onClick="numberBtn('.')" align="center"></td>
+        <td><input type="button" value="=" onClick="equal()" align="center"></td>
+        <td><input type="button" value="/" onClick="operationBtn('/')" align="center"></td>
+    </tr>
+    <tr align="center">
+        <td><input align="center" type="button" value="MC" onClick="clearBtn('MC')"></td>
+    </tr>
+    </div>
+    </table>
+
+</body>
+
+
+</html>
